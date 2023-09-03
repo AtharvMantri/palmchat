@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palm 2 Chat</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #74EBD5;
+            background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            animation: wave 3s infinite linear alternate, colorChange 5s infinite alternate;
+        }
+
+        @keyframes wave {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+
+        @keyframes colorChange {
+            0% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+            }
+
+            10% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #B1E5DF 100%);
+            }
+
+            20% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #C4E0D8 100%);
+            }
+
+            30% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #D7DAD1 100%);
+            }
+
+            40% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #E9D5C9 100%);
+            }
+
+            50% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #FCCFBF 100%);
+            }
+
+            60% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #FFBFB0 100%);
+            }
+
+            70% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #FFAE9F 100%);
+            }
+
+            80% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #FF9E8E 100%);
+            }
+
+            90% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #FF8E7E 100%);
+            }
+
+            100% {
+                background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+            }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 1600px;
+            width: 100%;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .info-box {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 520px;
+            background-color: #f5f5f5;
+            border-radius: 25px;
+            padding: 10px;
+            margin-left: 500px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out, slideInUp 1s ease-in-out;
+        }
+
+        .header:hover .info-box {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .info-icon {
+            position: relative;
+            top: 4px;
+            cursor: pointer;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .chat-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-height: 400px;
+            overflow-y: auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .input-group {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        input::placeholder {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .user-message {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .bot-message {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .input-group-append button {
+            border: none;
+            background-color: transparent;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .input-group-append button:hover {
+            color: #0056b3;
+        }
+
+        .suggested-messages {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .suggested-message-card {
+            background-color: #f5f5f5;
+            border-radius: 25px;
+            padding: 10px;
+            margin-left: 25px;
+            margin-bottom: 10px;
+            /* Fixed width and height for suggestion cards */
+            width: 48%;
+            /* Adjust as needed */
+            height: 120px;
+            /* Adjust as needed */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .suggested-message-card i {
+            margin-right: 10px;
+        }
+
+        /* Add more suggested messages as needed */
+        .suggested-message-card:nth-child(odd) {
+            background-color: #e5e5e5;
+        }
+
+        .suggested-message-card:nth-child(2n) {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="display-4">Palm 2 <i class="fas fa-info-circle info-icon"></i> Chat <br>
+                <h2>-By Atharv Mantri</h2>
+            </h1>
+            <div class="info-box">
+                PaLM 2 is a large language model (LLM) developed by Google AI. It is a successor to PaLM, which was
+                announced in 2022. PaLM 2 is trained on a massive dataset of text and code. Google says that this model
+                was trained in over 200 languages and 20 programming languages.
+            </div>
+        </div>
+
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will be added here -->
+            {% for message in response_text %}
+                {% if message[0] == 'user' %}
+                    <div class="user-message">
+                        <p>{{ message[1] }}</p>
+                        <span class="message-time">{{ message[2] }}</span>
+                    </div>
+                {% elif message[0] == 'ai' %}
+                    <div class="bot-message">
+                        <!-- Use the |safe filter to render HTML -->
+                        <p>{{ message[1]|safe }}</p>
+                        <span class="message-time">{{ message[2] }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>        
+
+        <div class="suggested-messages" id="suggested-messages">
+            <!-- Suggested Message Cards will be added using JavaScript -->
+        </div>
+        <form action="/" class="input-group" method="POST">
+            <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+                class="form-control rounded-0 border-0 py-2" name="user_input" id="user_input">
+            <div class="input-group-append">
+                <button id="button-addon2" type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Manually write 100 suggestions
+        const suggestions = [
+            "Create a friendly greeting message for users.",
+            "Offer assistance with common inquiries.",
+            "Implement natural language understanding.",
+            "Provide options for different topics.",
+            "Use emojis to make conversations engaging.",
+            "Ensure quick response times.",
+            "Offer a help command for users to get instructions.",
+            "Incorporate humor or jokes for a fun interaction.",
+            "Customize responses based on user preferences.",
+            "Allow users to set their preferred language.",
+            "Use machine learning to improve responses over time.",
+            "Ask for user feedback and use it for improvement.",
+            "Provide informative responses to factual questions.",
+            "Offer recommendations based on user history.",
+            "Explain complex concepts in a simple manner.",
+            "Share interesting trivia and facts.",
+            "Offer a 'Did you know?' feature.",
+            "Assist with setting reminders and alarms.",
+            "Help users with time zone conversions.",
+            "Integrate with external services like weather updates.",
+            "Provide motivational quotes and messages.",
+            "Offer support for multiple platforms (web, mobile, etc.).",
+            "Implement a feature for sharing images and memes.",
+            "Offer a 'Tell me a story' option.",
+            "Assist with basic math calculations.",
+            "Include a 'Find nearby restaurants' function.",
+            "Offer tips for improving productivity.",
+            "Help users with travel planning and booking.",
+            "Implement a 'Translate' feature for different languages.",
+            "Share daily news and updates.",
+            "Offer a 'Quiz me' option for trivia questions.",
+            "Provide recommendations for movies or music.",
+            "Offer support for health-related queries.",
+            "Assist with grammar and language correction.",
+            "Provide suggestions for quick and healthy recipes.",
+            "Implement a 'Search the web' function.",
+            "Offer guidance on fitness and workouts.",
+            "Assist with finding online courses and tutorials.",
+            "Share book recommendations and summaries.",
+            "Provide weather forecasts for specific locations.",
+            "Offer coding and programming help.",
+            "Assist with home DIY projects.",
+            "Provide information on historical events.",
+            "Offer travel tips and cultural insights.",
+            "Share interesting science facts.",
+            "Assist with learning a new language.",
+            "Provide tips for stress relief and relaxation.",
+            "Offer suggestions for improving sleep quality.",
+            "Help users discover new hobbies.",
+            "Implement a 'Joke of the day' feature.",
+            "Offer advice on pet care.",
+            "Share famous quotes from inspirational figures.",
+            "Provide guidance on job searching and resume building.",
+            "Offer recommendations for local events and activities.",
+            "Assist with financial planning and budgeting.",
+            "Share interesting facts about space and astronomy.",
+            "Provide travel itineraries and tips for specific destinations.",
+            "Assist with finding online resources for homeschooling.",
+            "Offer recommendations for classic books.",
+            "Provide tips for eco-friendly living.",
+            "Share gardening advice and plant care tips.",
+            "Offer guidance on meditation and mindfulness.",
+            "Assist with tech troubleshooting.",
+            "Share tips for photography and photo editing.",
+            "Provide information on wildlife and conservation.",
+            "Offer suggestions for creative writing prompts.",
+            "Assist with finding volunteer opportunities.",
+            "Share travel stories and experiences.",
+            "Provide fashion and style advice.",
+            "Offer recommendations for online gaming.",
+            "Share famous historical speeches and documents.",
+            "Assist with party planning and event organization.",
+            "Provide tips for time management.",
+            "Offer suggestions for self-improvement books.",
+            "Share fascinating psychology facts.",
+            "Assist with DIY crafts and art projects.",
+            "Provide tips for effective communication.",
+            "Offer recommendations for documentaries.",
+            "Share information on famous landmarks.",
+            "Assist with car maintenance and repair.",
+            "Provide tips for healthy eating habits.",
+            "Offer recommendations for educational YouTube channels.",
+            "Share interesting facts about animals.",
+            "Assist with travel visa and passport information.",
+            "Provide tips for job interview preparation.",
+            "Offer suggestions for board games and puzzles.",
+            "Share famous quotes from philosophers.",
+            "Assist with learning musical instruments.",
+            "Provide tips for online safety and cybersecurity.",
+            "Offer recommendations for virtual museum tours.",
+            "Share fun science experiments to try at home.",
+            "Assist with finding local volunteering opportunities.",
+            "Provide tips for building a personal website.",
+            "Offer recommendations for online shopping deals.",
+            "Share fascinating facts about technology.",
+            "Assist with planning a camping trip.",
+            "Provide tips for effective public speaking.",
+            "Offer suggestions for improving memory.",
+            "Share famous quotes from leaders and visionaries.",
+            "Assist with finding motivational podcasts."
+        ]
+
+        // Shuffle the suggestions array
+        const shuffledSuggestions = suggestions.sort(() => 0.5 - Math.random());
+
+        // Display the first 9 shuffled suggestions
+        const suggestedMessages = document.getElementById('suggested-messages');
+        for (let i = 0; i < 8; i++) {
+            const card = document.createElement('div');
+            card.className = 'suggested-message-card';
+            card.innerHTML = `<i class="fas fa-arrow-right"></i>${shuffledSuggestions[i]}`;
+            suggestedMessages.appendChild(card);
+        }
+
+        // Add a click event listener to each suggestion card
+        const suggestionCards = document.querySelectorAll('.suggested-message-card');
+        const userInput = document.getElementById('user_input');
+
+        suggestionCards.forEach((card) => {
+            card.addEventListener('click', () => {
+                // Get the text from the clicked card (excluding the arrow icon)
+                const messageText = card.textContent.trim().replace('➡', '');
+                // Insert the message into the input field
+                userInput.value = messageText;
+                // Hide the suggested messages
+                hideSuggestedMessages();
+            });
+        });
+
+        userInput.addEventListener('input', () => {
+            // Hide the suggested messages when the user starts typing
+            suggestedMessages.style.display = 'none';
+        });
+
+        // Function to hide the suggested messages
+        function hideSuggestedMessages() {
+            suggestedMessages.style.display = 'none';
+        }
+
+        // Function to add a bot message to the chat box
+        function addBotMessage(message) {
+            const chatBox = document.getElementById('chat-box');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'bot-message';
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>
