@@ -33,16 +33,16 @@ To get started with Palm 2 Chat, follow these steps:
 
 ### 1. Install the required Python packages:
 
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ### 2. Set your PaLM 2 API key in the Flask app by modifying the palm.configure(api_key='YOUR_API_KEY_HERE') line in app.py.
 ### 3. Run the Flask application:
 
-```bash
-python app.py
-```
+   ```bash
+   python app.py
+   ```
 ### 4. Open a web browser and navigate to http://localhost:5000 to start using the chat application.
 
 ### Usage
