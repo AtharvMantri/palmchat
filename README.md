@@ -26,34 +26,39 @@ Before running this application, make sure you have the following installed:
    git clone https://github.com/AtharvMantri/palmchat.git
 Install the required Python packages:
 
-bash
-Copy code
-Save code
-Run code
+## Getting Started
+
+To get started with Palm 2 Chat, follow these steps:
+
+### 1. Install the required Python packages:
+
+```bash
 pip install -r requirements.txt
-Set your PaLM 2 API key in the Flask app by modifying the palm.configure(api_key='YOUR_API_KEY_HERE') line in app.py.
 
-Run the Flask application:
+### 2. Set your PaLM 2 API key in the Flask app by modifying the palm.configure(api_key='YOUR_API_KEY_HERE') line in app.py.
+### 3. Run the Flask application:
 
+```bash
 python app.py
-Open a web browser and navigate to http://localhost:5000 to start using the chat application.
 
-Usage
+### 4. Open a web browser and navigate to http://localhost:5000 to start using the chat application.
+
+### Usage
 Enter your message in the input box and click "Send."
 The chatbot will provide responses in real-time.
 You can also click on suggested messages to populate the input box with them.
-Customization
+
+### Customization
 You can customize this chat application by modifying the HTML and CSS in the templates/index.html file. You can also adjust the chatbot's behavior by configuring the defaults dictionary in app.py.
 
-License
+### License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgments
+### Acknowledgments
 Flask - The web framework used.
 Google's PaLM 2 - The AI language model.
 Bootstrap - Used for styling.
 Font Awesome - Used for icons.
 
-
-Author
+### Author
 Atharv Mantri
